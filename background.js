@@ -80,6 +80,8 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
 
 // This is pretty crazy
 // https://stackoverflow.com/a/28858129/1732483
+// Just adding `chromedotfiles/__background.js` to the manifest would cause error
+// if the file would not exist, so have to use this madness
 chrome.runtime.getPackageDirectoryEntry(storageRootEntry => {
   storageRootEntry.getFile(`chromedotfiles/__background.js`, {create: false},
     fileEntry => {
