@@ -59,7 +59,7 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
   // load css early for no visible delays
   if (changeInfo.status === 'loading') {
     // attempt to insert default css
-    insertCSS(tabId, 'default');
+    insertCSS(tabId, '__default');
     if (match) {
       // attempt to insert domain specific css
       insertCSS(tabId, match.hostname);
@@ -69,7 +69,7 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
   // load js
   if (changeInfo.status === 'complete') {
     // attempt to execute default js
-    executeScript(tabId, 'default');
+    executeScript(tabId, '__default');
     if (match) {
       // attempt to insert domain specific css
       executeScript(tabId, match.hostname);
