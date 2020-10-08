@@ -77,3 +77,23 @@ chrome.tabs.onUpdated.addListener(function (tabId, changeInfo, tab) {
   }
 
 });
+
+// This is pretty crazy
+// https://stackoverflow.com/a/28858129/1732483
+chrome.runtime.getPackageDirectoryEntry(storageRootEntry => {
+  storageRootEntry.getFile(`chromedotfiles/__background.js`, {create: false},
+    fileEntry => {
+      fileEntry.file(file => {
+        var reader = new FileReader();
+        reader.onloadend = function (e) {
+          // Requires `content_security_policy` set to #YOLO mode in manifest
+          eval(e.target.result)
+        };
+        reader.readAsText(file);
+      })
+    },
+    function () {
+      // `__background.js` does not exist
+    }
+  )
+})

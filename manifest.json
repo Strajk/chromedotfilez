@@ -1,20 +1,22 @@
 {
   "manifest_version": 2,
-  "name": "Chrome dotfiles",
-  "version": "2.0.0",
+  "name": "Chrome dotfilez",
+  "version": "3.0.0",
   "description": "inject js and css into chrome tabs",
   "icons": {
      "128": "icon-128.png",
      "48": "icon-48.png"
   },
+  "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
   "permissions": [
-    "http://*/",
-    "https://*/",
     "webNavigation",
-    "tabs"
+    "tabs",
+    "webRequest",
+    "webRequestBlocking",
+    "<all_urls>"
   ],
   "background": {
-    "persistent": false,
+    "persistent": true,
     "scripts": ["background.js"]
   }
 }
